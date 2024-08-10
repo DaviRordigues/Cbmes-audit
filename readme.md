@@ -5,3 +5,4 @@ TAREFAS
 - [ ] Corrigir os TODOS
 - [ ] Corrigir os nomes das pastas. ex: controller -> controllers
 - [ ] Criar um arquivo de configuração para o ambiente de homologação e produção (application-prod.yml.). eles podem estar vazios
+- [ ] Implementar a lib do swagger: Springfox Swagger 2 (https://blog.mestwin.net/swagger-documentation-for-your-spring-boot-api-with-springfox/)
