@@ -12,9 +12,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuditDTO {
-    private Long id;
-    private String sourceApp;
-    private Date creationDate;
-    private String auditedUser;
-    private String description;
+	private Long id;
+	private String sourceApp;
+	//TODO: CREATION DATE PRECISA SER AUTOGERADO E NAO PASSADO VIA DTO
+	private Date creationDate;
+	private String auditedUser;
+	private String description;
 }

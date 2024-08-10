@@ -24,14 +24,18 @@ public class AuditServiceImpl implements AuditService {
 	}
 
 	@Override
+	//TODO: AuditDTO e filter SÃO AS MESMAS COISAS? PORQUE NAO USAR O MESMO NOME? O NOME AUDITDTO NÃO É REPRESENTA O QUE ELE PRETENDE FAZER?
+	//TODO: FILTER DE QUE? O NOME NÃO É MUITO CLARO.
 	public Page<AuditDTO> findAll(Pageable pageable, AuditDTO filter) {
 		AuditEntity exampleEntity = createAuditEntityFromDTO(filter);
 
+		//TODO: ESSA PARECE UMA ABORDAGEM INTERESSANTE, MAS NÃO ATENDE AO RANGE DA DATAS.
 		Example<AuditEntity> example = Example.of(exampleEntity);
 		return auditRepository.findAll(example, pageable)
 				.map(this::createAuditDTOFromEntity);
 	}
 
+	//TODO: VAMOS MOVER ESSE MÉTODO PARA OUTRO LOCAL. VAMOS CRIAR UMA CLASSE CHAMADA AuditMapper E COLOCAR ELA DENTRO DE UM PACOTE CHAMADO mappers
 	private AuditEntity createAuditEntityFromDTO(AuditDTO auditDTO) {
 		return AuditEntity.builder()
 				.sourceApp(auditDTO.getSourceApp())
@@ -40,7 +44,7 @@ public class AuditServiceImpl implements AuditService {
 				.description(auditDTO.getDescription())
 				.build();
 	}
-
+	//TODO: VAMOS MOVER ESSE MÉTODO PARA OUTRO LOCAL. VAMOS CRIAR UMA CLASSE CHAMADA AuditMapper E COLOCAR ELA DENTRO DE UM PACOTE CHAMADO mappers
 	private AuditDTO createAuditDTOFromEntity(AuditEntity auditEntity) {
 		return AuditDTO.builder()
 				.id(auditEntity.getId())

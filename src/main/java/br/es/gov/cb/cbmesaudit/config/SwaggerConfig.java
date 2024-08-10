@@ -10,23 +10,25 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
+//TODO: TESTAR SE O SWAGGER ESTÁ FUNCIONANDO. NAO CONSEGUI VERIFICAR SE ESTÁ FUNCIONANDO EM: http://localhost:8080/swagger-ui/
 public class SwaggerConfig {
-
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("br.es.gov.cb.cbmesaudit.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Audit API")
-                .description("API to manage audits")
-                .version("1.0.0")
-                .build();
-    }
+	
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.select()
+				//TODO: ESTE PACOTE DEVE SER ALTERADO PARA O PACOTE QUE CONTÉM OS CONTROLLERS
+				.apis(RequestHandlerSelectors.basePackage("br.es.gov.cb.cbmesaudit.controller"))
+				.paths(PathSelectors.any())
+				.build()
+				.apiInfo(apiInfo());
+	}
+	
+	private ApiInfo apiInfo() {
+		return new ApiInfoBuilder()
+				.title("Audit API")
+				.description("API to manage audits")
+				.version("1.0.0")
+				.build();
+	}
 }
