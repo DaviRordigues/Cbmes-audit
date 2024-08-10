@@ -17,8 +17,6 @@ public class AuditfilterDTO {
 	private String sourceApp;
 	private String auditedUser;
 	private String description;
-	@JsonIgnore
 	private LocalDateTime startDate;
-	@JsonIgnore
 	private LocalDateTime endDate;
 }

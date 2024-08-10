@@ -6,17 +6,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/audits")
 public class AuditController {
-	
+
 	private final AuditService auditService;
 
 	@PostMapping
@@ -26,7 +24,19 @@ public class AuditController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<AuditfilterDTO>> findAll(Pageable pageable, AuditfilterDTO AuditfilterDTO) {
-		return ResponseEntity.ok(auditService.findAll(pageable, AuditfilterDTO));
+	public ResponseEntity<Page<AuditfilterDTO>> findAll(
+			Pageable pageable,
+			@RequestParam(required = false) LocalDateTime startDate,
+			@RequestParam(required = false) LocalDateTime endDate,
+			@RequestParam(required = false) String auditedUser,
+			@RequestParam(required = false) String sourceApp) {
+
+		AuditfilterDTO filterDTO = new AuditfilterDTO();
+		filterDTO.setStartDate(startDate);
+		filterDTO.setEndDate(endDate);
+		filterDTO.setAuditedUser(auditedUser);
+		filterDTO.setSourceApp(sourceApp);
+
+		return ResponseEntity.ok(auditService.findAll(pageable, filterDTO));
 	}
 }
