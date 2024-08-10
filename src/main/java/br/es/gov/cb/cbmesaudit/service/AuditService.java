@@ -1,13 +1,11 @@
 package br.es.gov.cb.cbmesaudit.service;
 
 import br.es.gov.cb.cbmesaudit.dto.AuditDTO;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface AuditService {
-    AuditDTO createAudit(AuditDTO auditDTO);
-    AuditDTO getAuditById(Long id);
-    List<AuditDTO> getAllAudits();
-    AuditDTO updateAudit(Long id, AuditDTO auditDTO);
-    void deleteAudit(Long id);
+    AuditDTO create(AuditDTO auditDTO);
+    AuditDTO findById(Long id);
+    Page<AuditDTO> findAll(Pageable pageable);
 }

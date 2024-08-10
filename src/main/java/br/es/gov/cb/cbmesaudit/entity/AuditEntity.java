@@ -3,24 +3,24 @@ package br.es.gov.cb.cbmesaudit.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
-@Table(name = "audit")
+@Table(name = "AUDITS")
 @Getter
 @Setter
 @Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Audit {
+public class AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String sourceApp;
-    private LocalDateTime creationDate;
+    private Date creationDate;
     private String auditedUser;
     private String description;
 

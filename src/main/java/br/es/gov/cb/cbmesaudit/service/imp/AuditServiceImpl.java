@@ -1,14 +1,14 @@
 package br.es.gov.cb.cbmesaudit.service.imp;
 
 import br.es.gov.cb.cbmesaudit.dto.AuditDTO;
-import br.es.gov.cb.cbmesaudit.entity.Audit;
+import br.es.gov.cb.cbmesaudit.entity.AuditEntity;
 import br.es.gov.cb.cbmesaudit.repository.AuditRepository;
 import br.es.gov.cb.cbmesaudit.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AuditServiceImpl implements AuditService {
@@ -17,63 +17,44 @@ public class AuditServiceImpl implements AuditService {
     private AuditRepository auditRepository;
 
     @Override
-    public AuditDTO createAudit(AuditDTO auditDTO) {
-        Audit audit = new Audit();
-        audit.setSourceApp(auditDTO.getSourceApp());
-        audit.setCreationDate(auditDTO.getCreationDate());
-        audit.setAuditedUser(auditDTO.getAuditedUser());
-        audit.setDescription(auditDTO.getDescription());
+    @Async
+    public AuditDTO create(AuditDTO auditDTO) {
+        AuditEntity auditEntity = new AuditEntity();
+        auditEntity.setSourceApp(auditDTO.getSourceApp());
+        auditEntity.setCreationDate(auditDTO.getCreationDate());
+        auditEntity.setAuditedUser(auditDTO.getAuditedUser());
+        auditEntity.setDescription(auditDTO.getDescription());
 
-        audit = auditRepository.save(audit);
-        auditDTO.setId(audit.getId());
+        auditEntity = auditRepository.save(auditEntity);
+        auditDTO.setId(auditEntity.getId());
         return auditDTO;
     }
 
     @Override
-    public AuditDTO getAuditById(Long id) {
+    public AuditDTO findById(Long id) {
         return auditRepository.findById(id)
-                .map(audit -> {
+                .map(auditEntity -> {
                     AuditDTO auditDTO = new AuditDTO();
-                    auditDTO.setId(audit.getId());
-                    auditDTO.setSourceApp(audit.getSourceApp());
-                    auditDTO.setCreationDate(audit.getCreationDate());
-                    auditDTO.setAuditedUser(audit.getAuditedUser());
-                    auditDTO.setDescription(audit.getDescription());
+                    auditDTO.setId(auditEntity.getId());
+                    auditDTO.setSourceApp(auditEntity.getSourceApp());
+                    auditDTO.setCreationDate(auditEntity.getCreationDate());
+                    auditDTO.setAuditedUser(auditEntity.getAuditedUser());
+                    auditDTO.setDescription(auditEntity.getDescription());
                     return auditDTO;
                 }).orElse(null);
     }
 
     @Override
-    public List<AuditDTO> getAllAudits() {
-        return auditRepository.findAll()
-                .stream()
-                .map(audit -> {
+    public Page<AuditDTO> findAll(Pageable pageable) {
+        return auditRepository.findAll(pageable)
+                .map(auditEntity -> {
                     AuditDTO auditDTO = new AuditDTO();
-                    auditDTO.setId(audit.getId());
-                    auditDTO.setSourceApp(audit.getSourceApp());
-                    auditDTO.setCreationDate(audit.getCreationDate());
-                    auditDTO.setAuditedUser(audit.getAuditedUser());
-                    auditDTO.setDescription(audit.getDescription());
+                    auditDTO.setId(auditEntity.getId());
+                    auditDTO.setSourceApp(auditEntity.getSourceApp());
+                    auditDTO.setCreationDate(auditEntity.getCreationDate());
+                    auditDTO.setAuditedUser(auditEntity.getAuditedUser());
+                    auditDTO.setDescription(auditEntity.getDescription());
                     return auditDTO;
-                }).collect(Collectors.toList());
-    }
-
-    @Override
-    public AuditDTO updateAudit(Long id, AuditDTO auditDTO) {
-        return auditRepository.findById(id)
-                .map(audit -> {
-                    audit.setSourceApp(auditDTO.getSourceApp());
-                    audit.setCreationDate(auditDTO.getCreationDate());
-                    audit.setAuditedUser(auditDTO.getAuditedUser());
-                    audit.setDescription(auditDTO.getDescription());
-                    auditRepository.save(audit);
-                    auditDTO.setId(audit.getId());
-                    return auditDTO;
-                }).orElse(null);
-    }
-
-    @Override
-    public void deleteAudit(Long id) {
-        auditRepository.deleteById(id);
+                });
     }
 }

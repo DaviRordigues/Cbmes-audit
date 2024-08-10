@@ -3,10 +3,11 @@ package br.es.gov.cb.cbmesaudit.controller;
 import br.es.gov.cb.cbmesaudit.dto.AuditDTO;
 import br.es.gov.cb.cbmesaudit.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/audits")
@@ -16,28 +17,20 @@ public class AuditController {
     private AuditService auditService;
 
     @PostMapping
-    public ResponseEntity<AuditDTO> createAudit(@RequestBody AuditDTO auditDTO) {
-        return ResponseEntity.ok(auditService.createAudit(auditDTO));
+    public ResponseEntity<AuditDTO> create(@RequestBody AuditDTO auditDTO) {
+        return ResponseEntity.ok(auditService.create(auditDTO));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AuditDTO> getAuditById(@PathVariable Long id) {
-        return ResponseEntity.ok(auditService.getAuditById(id));
+    public ResponseEntity<AuditDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(auditService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<AuditDTO>> getAllAudits() {
-        return ResponseEntity.ok(auditService.getAllAudits());
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<AuditDTO> updateAudit(@PathVariable Long id, @RequestBody AuditDTO auditDTO) {
-        return ResponseEntity.ok(auditService.updateAudit(id, auditDTO));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAudit(@PathVariable Long id) {
-        auditService.deleteAudit(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Page<AuditDTO>> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(auditService.findAll(pageable));
     }
 }
