@@ -5,9 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CbmesAuditApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CbmesAuditApplication.class, args);
 	}
-
+	
 }

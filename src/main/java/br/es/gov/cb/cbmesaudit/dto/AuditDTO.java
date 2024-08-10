@@ -17,6 +17,7 @@ public class AuditDTO {
     private Date creationDate;
     private String auditedUser;
     private String description;
+//TODO: EVITE O USO DE LINHAS EM BRANCO DENTRO DE UMA CLASSE
 
 
 }

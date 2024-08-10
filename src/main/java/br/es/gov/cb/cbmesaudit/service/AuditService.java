@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface AuditService {
-    AuditDTO create(AuditDTO auditDTO);
+    void create(AuditDTO auditDTO);
     AuditDTO findById(Long id);
     Page<AuditDTO> findAll(Pageable pageable);
 }
