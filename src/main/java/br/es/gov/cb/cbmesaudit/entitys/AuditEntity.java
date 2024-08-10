@@ -22,15 +22,20 @@ public class AuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "source_app", nullable = false)
-    //TODO: POR PADRAO, O TAMANHO DA COLUNA É 255. PARA UM NOME DE APLICAÇÃO, ESSE TAMANHO PODE SER GRANDE DEMAIS
+    @Column(name = "source_app", nullable = false, length = 100)
+    //TODO: POR PADRAO, O TAMANHO DA COLUNA É 255. PARA UM NOME DE APLICAÇÃO, ESSE TAMANHO PODE SER GRANDE DEMAISXXXXXXXXXXX
     private String sourceApp;
-    @Column(name = "creation_date", nullable = false)
+
+    @Column(name = "creation_date", nullable = false, updatable = false) //TODO: CREATION DATE PRECISA SER AUTOGERADO E NAO PASSADO VIA DTOXXXXXX
     @Temporal(TemporalType.TIMESTAMP)
-    //TODO: CREATION DATE PRECISA SER AUTOGERADO E NAO PASSADO VIA DTO
+    @PrePersist
+    protected void onCreate() {
+        creationDate = new Date();
+    }
     private Date creationDate;
-    @Column(name = "audited_user", nullable = false)
-    //TODO: POR PADRAO, O TAMANHO DA COLUNA É 255. PARA UM NOME DE USUARIO, ESSE TAMANHO PODE SER GRANDE DEMAIS
+
+    @Column(name = "audited_user", nullable = false, length = 100)
+    //TODO: POR PADRAO, O TAMANHO DA COLUNA É 255. PARA UM NOME DE USUARIO, ESSE TAMANHO PODE SER GRANDE DEMAISXXXXXXXXXX
     private String auditedUser;
     @Column(name = "description", nullable = false)
     private String description;

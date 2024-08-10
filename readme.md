@@ -4,5 +4,5 @@ TAREFAS
 - [x] Criar uma indexação para facilitar a busca na entidade
 - [x] Corrigir os TODOS
 - [x] Corrigir os nomes das pastas. ex: controller -> controllers
-- [ ] Criar um arquivo de configuração para o ambiente de homologação e produção (application-prod.yml.). eles podem estar vazios
-- [ ] Implementar a lib do swagger: Springfox Swagger 2 (https://blog.mestwin.net/swagger-documentation-for-your-spring-boot-api-with-springfox/)
+- [x] Criar um arquivo de configuração para o ambiente de homologação e produção (application-prod.yml.). eles podem estar vazios ( eu criei esta abaixo do application.yml)
+- [x] Implementar a lib do swagger: Springfox Swagger 2 (https://blog.mestwin.net/swagger-documentation-for-your-spring-boot-api-with-springfox/)

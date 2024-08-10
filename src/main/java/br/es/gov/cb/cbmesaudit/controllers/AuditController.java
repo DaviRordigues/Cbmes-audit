@@ -1,6 +1,6 @@
 package br.es.gov.cb.cbmesaudit.controllers;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditDTO;
+import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
 import br.es.gov.cb.cbmesaudit.services.AuditService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,13 +20,13 @@ public class AuditController {
 	private final AuditService auditService;
 
 	@PostMapping
-	public ResponseEntity<Void> create(@RequestBody AuditDTO auditDTO) {
-		auditService.create(auditDTO);
+	public ResponseEntity<Void> create(@RequestBody AuditfilterDTO auditfilterDTO) {
+		auditService.create(auditfilterDTO);
 		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<AuditDTO>> findAll(Pageable pageable, AuditDTO filter) {
-		return ResponseEntity.ok(auditService.findAll(pageable, filter));
+	public ResponseEntity<Page<AuditfilterDTO>> findAll(Pageable pageable, AuditfilterDTO AuditfilterDTO) {
+		return ResponseEntity.ok(auditService.findAll(pageable, AuditfilterDTO));
 	}
 }

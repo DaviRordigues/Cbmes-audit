@@ -1,13 +1,15 @@
 package br.es.gov.cb.cbmesaudit.services.imps;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditDTO;
+import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
 import br.es.gov.cb.cbmesaudit.entitys.AuditEntity;
+import br.es.gov.cb.cbmesaudit.mapper.AuditMapper;
 import br.es.gov.cb.cbmesaudit.repositorys.AuditRepository;
 import br.es.gov.cb.cbmesaudit.services.AuditService;
+import br.es.gov.cb.cbmesaudit.specification.AuditSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -19,39 +21,19 @@ public class AuditServiceImpl implements AuditService {
 
 	@Override
 	@Async
-	public void create(AuditDTO auditDTO) {
-		auditRepository.save(createAuditEntityFromDTO(auditDTO));
+	public void create(AuditfilterDTO auditfilterDTO) {
+		auditRepository.save(AuditMapper.createAuditEntityFromDTO(auditfilterDTO));
 	}
 
 	@Override
-	//TODO: AuditDTO e filter SÃO AS MESMAS COISAS? PORQUE NAO USAR O MESMO NOME? O NOME AUDITDTO NÃO É REPRESENTA O QUE ELE PRETENDE FAZER?
-	//TODO: FILTER DE QUE? O NOME NÃO É MUITO CLARO.
-	public Page<AuditDTO> findAll(Pageable pageable, AuditDTO filter) {
-		AuditEntity exampleEntity = createAuditEntityFromDTO(filter);
-
-		//TODO: ESSA PARECE UMA ABORDAGEM INTERESSANTE, MAS NÃO ATENDE AO RANGE DA DATAS.
-		Example<AuditEntity> example = Example.of(exampleEntity);
-		return auditRepository.findAll(example, pageable)
-				.map(this::createAuditDTOFromEntity);
+	//TODO: AuditDTO e filter SÃO AS MESMAS COISAS? PORQUE NAO USAR O MESMO NOME? O NOME AUDITDTO NÃO É REPRESENTA O QUE ELE PRETENDE FAZER?xxxxxxxxxxx
+	//TODO: FILTER DE QUE? O NOME NÃO É MUITO CLARO, TROQUEI O NOME E DEIXEI MAIS CLARO.xxxxxxxxxxx
+	public Page<AuditfilterDTO> findAll(Pageable pageable, AuditfilterDTO auditfilterDTO) {
+		Specification<AuditEntity> spec = AuditSpecification.getByFilter(auditfilterDTO);
+		return auditRepository.findAll(spec, pageable)
+				.map(AuditMapper::createAuditDTOFromEntity);
 	}
 
-	//TODO: VAMOS MOVER ESSE MÉTODO PARA OUTRO LOCAL. VAMOS CRIAR UMA CLASSE CHAMADA AuditMapper E COLOCAR ELA DENTRO DE UM PACOTE CHAMADO mappers
-	private AuditEntity createAuditEntityFromDTO(AuditDTO auditDTO) {
-		return AuditEntity.builder()
-				.sourceApp(auditDTO.getSourceApp())
-				.creationDate(auditDTO.getCreationDate())
-				.auditedUser(auditDTO.getAuditedUser())
-				.description(auditDTO.getDescription())
-				.build();
-	}
-	//TODO: VAMOS MOVER ESSE MÉTODO PARA OUTRO LOCAL. VAMOS CRIAR UMA CLASSE CHAMADA AuditMapper E COLOCAR ELA DENTRO DE UM PACOTE CHAMADO mappers
-	private AuditDTO createAuditDTOFromEntity(AuditEntity auditEntity) {
-		return AuditDTO.builder()
-				.id(auditEntity.getId())
-				.sourceApp(auditEntity.getSourceApp())
-				.creationDate(auditEntity.getCreationDate())
-				.auditedUser(auditEntity.getAuditedUser())
-				.description(auditEntity.getDescription())
-				.build();
-	}
+	//TODO: ESSA PARECE UMA ABORDAGEM INTERESSANTE, MAS NÃO ATENDE AO RANGE DA DATAS (AGORA ATENDE KKKK).
+
 }
