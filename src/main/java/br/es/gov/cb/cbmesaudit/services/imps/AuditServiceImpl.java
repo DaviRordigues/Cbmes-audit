@@ -1,7 +1,7 @@
 package br.es.gov.cb.cbmesaudit.services.imps;
 
 import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
-import br.es.gov.cb.cbmesaudit.entitys.AuditEntity;
+import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
 import br.es.gov.cb.cbmesaudit.mapper.AuditMapper;
 import br.es.gov.cb.cbmesaudit.repositorys.AuditRepository;
 import br.es.gov.cb.cbmesaudit.services.AuditService;

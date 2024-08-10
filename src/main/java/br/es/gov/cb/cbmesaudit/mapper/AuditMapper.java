@@ -1,7 +1,7 @@
 package br.es.gov.cb.cbmesaudit.mapper;
 
 import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
-import br.es.gov.cb.cbmesaudit.entitys.AuditEntity;
+import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
 
 public class AuditMapper {
     //TODO: CRIEI A CLASSE

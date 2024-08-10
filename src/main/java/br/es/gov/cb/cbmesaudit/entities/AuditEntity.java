@@ -1,4 +1,4 @@
-package br.es.gov.cb.cbmesaudit.entitys;
+package br.es.gov.cb.cbmesaudit.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

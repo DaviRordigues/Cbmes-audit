@@ -3,7 +3,7 @@ package br.es.gov.cb.cbmesaudit.specification;
 import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import br.es.gov.cb.cbmesaudit.entitys.AuditEntity;
+import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
 
 public class AuditSpecification {
 
