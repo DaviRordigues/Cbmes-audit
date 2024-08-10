@@ -1,33 +1,24 @@
 package br.es.gov.cb.cbmesaudit.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
+
 @Configuration
-//TODO: TESTAR SE O SWAGGER ESTÁ FUNCIONANDO. NAO CONSEGUI VERIFICAR SE ESTÁ FUNCIONANDO EM: http://localhost:8080/swagger-ui/
 public class SwaggerConfig {
-
+	
 	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				//TODO: ESTE PACOTE DEVE SER ALTERADO PARA O PACOTE QUE CONTÉM OS CONTROLLERS XXX
-                .apis(RequestHandlerSelectors.basePackage("br.es.gov.cb.cbmesaudit.controllers"))
-				.paths(PathSelectors.any())
-				.build()
-				.apiInfo(apiInfo());
+	public OpenAPI apiInfo() {
+		return new OpenAPI().info(new Info().title("yametekudassai").version("1.0.0"));
 	}
-
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder()
-				.title("Audit API")
-				.description("API to manage audits")
-				.version("1.0.0")
+	
+	@Bean
+	public GroupedOpenApi httpApi() {
+		return GroupedOpenApi.builder()
+				.group("http")
+				.pathsToMatch("/**")
 				.build();
 	}
 }
