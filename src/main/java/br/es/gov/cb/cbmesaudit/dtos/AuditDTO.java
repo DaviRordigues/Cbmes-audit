@@ -1,4 +1,4 @@
-package br.es.gov.cb.cbmesaudit.dto;
+package br.es.gov.cb.cbmesaudit.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,4 @@ public class AuditDTO {
     private Date creationDate;
     private String auditedUser;
     private String description;
-//TODO: EVITE O USO DE LINHAS EM BRANCO DENTRO DE UMA CLASSE
-
-
 }
