@@ -1,6 +1,8 @@
 package br.es.gov.cb.cbmesaudit.services.imps;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
+import br.es.gov.cb.cbmesaudit.dtos.RequestAuditDTO;
+import br.es.gov.cb.cbmesaudit.dtos.ResponseAuditDTO;
+import br.es.gov.cb.cbmesaudit.dtos.PagedAuditDTO;
 import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
 import br.es.gov.cb.cbmesaudit.mapper.AuditMapper;
 import br.es.gov.cb.cbmesaudit.repositorys.AuditRepository;
@@ -10,8 +12,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,20 +24,25 @@ public class AuditServiceImpl implements AuditService {
 	private final AuditRepository auditRepository;
 
 	@Override
-	@Async
-	public void create(AuditfilterDTO auditfilterDTO) {
-		auditRepository.save(AuditMapper.createAuditEntityFromDTO(auditfilterDTO));
+	public void create(RequestAuditDTO requestAuditDTO) {
+		auditRepository.save(AuditMapper.createAuditEntityFromDTO(requestAuditDTO));
 	}
 
 	@Override
-	//TODO: AuditDTO e filter SÃO AS MESMAS COISAS? PORQUE NAO USAR O MESMO NOME? O NOME AUDITDTO NÃO É REPRESENTA O QUE ELE PRETENDE FAZER?xxxxxxxxxxx
-	//TODO: FILTER DE QUE? O NOME NÃO É MUITO CLARO, TROQUEI O NOME E DEIXEI MAIS CLARO.xxxxxxxxxxx
-	public Page<AuditfilterDTO> findAll(Pageable pageable, AuditfilterDTO auditfilterDTO) {
-		Specification<AuditEntity> spec = AuditSpecification.getByFilter(auditfilterDTO);
-		return auditRepository.findAll(spec, pageable)
-				.map(AuditMapper::createAuditDTOFromEntity);
+	public PagedAuditDTO findAll(Pageable pageable, RequestAuditDTO requestAuditDTO) {
+		Specification<AuditEntity> spec = AuditSpecification.getByFilter(requestAuditDTO);
+		Page<AuditEntity> page = auditRepository.findAll(spec, pageable);
+
+		List<ResponseAuditDTO> audits = page.getContent()
+				.stream()
+				.map(AuditMapper::createAuditDTOFromEntity)
+				.collect(Collectors.toList());
+
+		return PagedAuditDTO.builder()
+				.audits(audits)
+				.currentPage(page.getNumber())
+				.totalPages(page.getTotalPages())
+				.totalItems(page.getTotalElements())
+				.build();
 	}
-
-	//TODO: ESSA PARECE UMA ABORDAGEM INTERESSANTE, MAS NÃO ATENDE AO RANGE DA DATAS (AGORA ATENDE KKKK).
-
 }

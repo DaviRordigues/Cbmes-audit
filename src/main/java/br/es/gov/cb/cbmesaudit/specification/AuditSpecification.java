@@ -1,32 +1,40 @@
 package br.es.gov.cb.cbmesaudit.specification;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditfilterDTO;
+import br.es.gov.cb.cbmesaudit.dtos.RequestAuditDTO;
+import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
-import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class AuditSpecification {
 
-    public static Specification<AuditEntity> getByFilter(AuditfilterDTO AuditfilterDTO ) {
+    public static Specification<AuditEntity> getByFilter(RequestAuditDTO requestAuditDTO) {
         return (root, query, criteriaBuilder) -> {
-            Predicate predicate = criteriaBuilder.conjunction();
+            List<Predicate> predicates = new ArrayList<>();
 
-            if (AuditfilterDTO .getSourceApp() != null) {
-                predicate = criteriaBuilder.and(predicate,
-                        criteriaBuilder.equal(root.get("sourceApp"), AuditfilterDTO .getSourceApp()));
-            }
-            if (AuditfilterDTO .getAuditedUser() != null) {
-                predicate = criteriaBuilder.and(predicate,
-                        criteriaBuilder.equal(root.get("auditedUser"), AuditfilterDTO .getAuditedUser()));
-            }
-            if (AuditfilterDTO.getStartDate() != null && AuditfilterDTO.getEndDate() != null) {
-                predicate = criteriaBuilder.and(
-                        predicate,
-                        criteriaBuilder.between(root.get("creationDate"), AuditfilterDTO.getStartDate(), AuditfilterDTO.getEndDate())
-                );
+            if (requestAuditDTO.getAuditedUser() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("auditedUser"), requestAuditDTO.getAuditedUser()));
             }
 
-            return predicate;
+            if (requestAuditDTO.getSourceApp() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("sourceApp"), requestAuditDTO.getSourceApp()));
+            }
+
+            if (requestAuditDTO.getCreationDate() != null) {
+                LocalDateTime startOfDay = requestAuditDTO.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay();
+                LocalDateTime endOfDay = startOfDay.plusDays(1).minusSeconds(1);
+                predicates.add(criteriaBuilder.between(root.get("creationDate"),
+                        Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant()),
+                        Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant())));
+            }
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
+
 }
