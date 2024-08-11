@@ -1,10 +1,11 @@
 package br.es.gov.cb.cbmesaudit.controllers;
 
-import br.es.gov.cb.cbmesaudit.dtos.RequestAuditDTO;
-import br.es.gov.cb.cbmesaudit.dtos.PagedAuditDTO;
+import br.es.gov.cb.cbmesaudit.dtos.AuditRequestDTO;
+import br.es.gov.cb.cbmesaudit.dtos.AuditPagedDTO;
 import br.es.gov.cb.cbmesaudit.services.AuditService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,24 +19,26 @@ public class AuditController {
 	private final AuditService auditService;
 
 	@PostMapping
-	public ResponseEntity<Void> create(@RequestBody RequestAuditDTO requestAuditDTO) {
-		auditService.create(requestAuditDTO);
+	public ResponseEntity<Void> create(@RequestBody AuditRequestDTO auditRequestDTO) {
+		auditService.create(auditRequestDTO);
 		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping
-	public ResponseEntity<PagedAuditDTO> findAll(
+	public ResponseEntity<AuditPagedDTO> findAll(
 			Pageable pageable,
-			@RequestParam(required = false) String auditedUser,
-			@RequestParam(required = false) String sourceApp,
-			@RequestParam(required = false) Date creationDate) {
+			@RequestParam(required = false) String auditedUsers,
+			@RequestParam(required = false) String sourceApps,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date startTime,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date endTime) {
 
-		RequestAuditDTO requestAuditDTO = RequestAuditDTO.builder()
-				.creationDate(creationDate)
-				.auditedUser(auditedUser)
-				.sourceApp(sourceApp)
+		AuditRequestDTO auditRequestDTO = AuditRequestDTO.builder()
+				.auditedUser(auditedUsers)
+				.sourceApp(sourceApps)
+				.startTime(startTime)
+				.endTime(endTime)
 				.build();
 
-		return ResponseEntity.ok(auditService.findAll(pageable, requestAuditDTO));
+		return ResponseEntity.ok(auditService.findAll(pageable, auditRequestDTO));
 	}
 }

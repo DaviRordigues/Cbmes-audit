@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PagedAuditDTO {
-    private List<ResponseAuditDTO> audits;
+public class AuditPagedDTO {
+    private List<AuditResponseDTO> audits;
     private int currentPage;
     private int totalPages;
     private long totalItems;

@@ -5,16 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseAuditDTO {
+public class AuditResponseDTO {
     private Long id;
     private String sourceApp;
     private String auditedUser;
     private String description;
-    private Date creationDate;
 }

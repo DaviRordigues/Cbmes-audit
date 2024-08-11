@@ -5,16 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestAuditDTO {
+public class AuditRequestDTO {
     private String sourceApp;
     private String auditedUser;
+    private Date startTime;
+    private Date endTime;
     private String description;
-    private Date creationDate;
 }

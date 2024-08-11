@@ -1,26 +1,25 @@
 package br.es.gov.cb.cbmesaudit.mapper;
 
-import br.es.gov.cb.cbmesaudit.dtos.RequestAuditDTO;
-import br.es.gov.cb.cbmesaudit.dtos.ResponseAuditDTO;
+import br.es.gov.cb.cbmesaudit.dtos.AuditRequestDTO;
+import br.es.gov.cb.cbmesaudit.dtos.AuditResponseDTO;
 import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
 
 public class AuditMapper {
 
-    public static AuditEntity createAuditEntityFromDTO(RequestAuditDTO requestAuditDTO) {
+    public static AuditEntity createAuditEntityFromDTO(AuditRequestDTO auditRequestDTO) {
         return AuditEntity.builder()
-                .sourceApp(requestAuditDTO.getSourceApp())
-                .auditedUser(requestAuditDTO.getAuditedUser())
-                .description(requestAuditDTO.getDescription())
+                .sourceApp(auditRequestDTO.getSourceApp())
+                .auditedUser(auditRequestDTO.getAuditedUser())
+                .description(auditRequestDTO.getDescription())
                 .build();
     }
 
-    public static ResponseAuditDTO createAuditDTOFromEntity(AuditEntity auditEntity) {
-        return ResponseAuditDTO.builder()
+    public static AuditResponseDTO createAuditDTOFromEntity(AuditEntity auditEntity) {
+        return AuditResponseDTO.builder()
                 .id(auditEntity.getId())
                 .sourceApp(auditEntity.getSourceApp())
                 .auditedUser(auditEntity.getAuditedUser())
                 .description(auditEntity.getDescription())
-                .creationDate(auditEntity.getCreationDate())
                 .build();
     }
 }
