@@ -1,14 +1,18 @@
-TAREFAS
-- [x] Criar o README.md
-- [x] Criar uma collection no postman e adicionar ao projeto à pasta postman
-- [x] Criar uma indexação para facilitar a busca na entidade
-- [x] Corrigir os TODOS
-- [x] Corrigir os nomes das pastas. ex: controller -> controllers
-- [x] Criar um arquivo de configuração para o ambiente de homologação e produção (application-prod.yml.). eles podem estar vazios ( eu criei esta abaixo do application.yml)
-- [x] Implementar a lib do swagger: Springfox Swagger 2 (https://blog.mestwin.net/swagger-documentation-for-your-spring-boot-api-with-springfox/)
-
-
-
 ## SWAGGER
-
 http://localhost:8080/swagger-ui/index.html
+## Existe uma pagina no projeto contendo um import para o postman
+
+## docker composer up - para subir a img no docker 
+
+## Criar o banco na ide com o user admin_user, e senha Oradoc_db1
+
+## Criar o usuario oracle
+## alter session set "_ORACLE_SCRIPT"=true;
+## CREATE USER admin_user IDENTIFIED BY Oradoc_db1;
+## GRANT CREATE SESSION TO admin_user;
+## GRANT CONNECT TO admin_user;
+## GRANT CONNECT, RESOURCE, DBA TO admin_user;
+## GRANT UNLIMITED TABLESPACE TO admin_user;
+## GRANT ALL privileges to admin_user;
+
+

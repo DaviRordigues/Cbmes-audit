@@ -1,7 +1,6 @@
 package br.es.gov.cb.cbmesaudit.services.imps;
 
 import br.es.gov.cb.cbmesaudit.dtos.AuditFilterDTO;
-import br.es.gov.cb.cbmesaudit.dtos.AuditPagedDTO;
 import br.es.gov.cb.cbmesaudit.dtos.AuditRequestDTO;
 import br.es.gov.cb.cbmesaudit.dtos.AuditResponseDTO;
 import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
@@ -11,8 +10,10 @@ import br.es.gov.cb.cbmesaudit.services.AuditService;
 import br.es.gov.cb.cbmesaudit.specification.AuditSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,14 +23,15 @@ import java.util.List;
 public class AuditServiceImpl implements AuditService {
 	
 	private final AuditRepository auditRepository;
-	
+
+	@Async
 	@Override
 	public void create(AuditRequestDTO auditRequestDTO) {
 		auditRepository.save(AuditMapper.createAuditEntityFromDTO(auditRequestDTO));
 	}
 	
 	@Override
-	public AuditPagedDTO findAll(Pageable pageable, AuditFilterDTO auditFilterDTO) {
+	public Page<AuditResponseDTO> findAll(Pageable pageable, AuditFilterDTO auditFilterDTO) {
 		Specification<AuditEntity> spec = AuditSpecification.getByFilter(auditFilterDTO);
 		Page<AuditEntity> page = auditRepository.findAll(spec, pageable);
 		
@@ -37,12 +39,7 @@ public class AuditServiceImpl implements AuditService {
 				.stream()
 				.map(AuditMapper::createAuditDTOFromEntity)
 				.toList();
-		
-		return AuditPagedDTO.builder()
-				.audits(audits)
-				.currentPage(page.getNumber())
-				.totalPages(page.getTotalPages())
-				.totalItems(page.getTotalElements())
-				.build();
+
+		return new PageImpl<>(audits);
 	}
 }

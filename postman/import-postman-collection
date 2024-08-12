@@ -1,74 +1,59 @@
 {
-  "info": {
-    "name": "CBMES Audit API",
-    "_postman_id": "cbmes-audit-collection",
-    "description": "Collection for testing CBMES Audit API endpoints",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Create Audit",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"sourceApp\": \"TestApp\",\n  \"creationDate\": \"2024-08-10T12:34:56Z\",\n  \"auditedUser\": \"test_user\",\n  \"description\": \"This is a test audit log entry.\"\n}"
-        },
-        "url": {
-          "raw": "http://localhost:8080/api/audits",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "audits"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get All Audits with Pagination",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8080/api/audits?page=0&size=10&sort=creationDate,desc",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "audits"
-          ],
-          "query": [
-            {
-              "key": "page",
-              "value": "0"
-            },
-            {
-              "key": "size",
-              "value": "10"
-            },
-            {
-              "key": "sort",
-              "value": "creationDate,desc"
-            }
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "CBMES Audit API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Audit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sourceApp\": \"app1\",\n\t\"auditedUser\": \"user1\",\n\t\"description\": \"Test description\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/audits",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "audits"]
+				}
+			}
+		},
+		{
+			"name": "Search Audits",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sourceApps\": [\"app1\"],\n\t\"auditedUsers\": [\"user1\"],\n\t\"startDate\": \"2024-08-01T00:00:00\",\n\t\"endDate\": \"2024-08-31T23:59:59\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/audits/search",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "audits", "search"]
+				}
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
 }
