@@ -9,7 +9,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -28,13 +30,13 @@ public class AuditController {
 	public ResponseEntity<AuditPagedDTO> findAll(
 			Pageable pageable,
 			@RequestParam(required = false) String auditedUsers,
-			@RequestParam(required = false) String sourceApps,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date startDate,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date endDate) {
+			@RequestParam(required = false) String sourceApss,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
 
 		AuditRequestDTO auditRequestDTO = AuditRequestDTO.builder()
 				.auditedUsers(auditedUsers)
-				.sourceApss(sourceApps)
+				.sourceApss(sourceApss)
 				.startDate(startDate)
 				.endDate(endDate)
 				.build();
