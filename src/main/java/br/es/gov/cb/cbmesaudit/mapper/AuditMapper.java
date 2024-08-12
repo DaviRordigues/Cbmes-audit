@@ -8,8 +8,8 @@ public class AuditMapper {
 
     public static AuditEntity createAuditEntityFromDTO(AuditRequestDTO auditRequestDTO) {
         return AuditEntity.builder()
-                .sourceApp(auditRequestDTO.getSourceApp())
-                .auditedUser(auditRequestDTO.getAuditedUser())
+                .sourceApp(auditRequestDTO.getSourceApss())
+                .auditedUser(auditRequestDTO.getAuditedUsers())
                 .description(auditRequestDTO.getDescription())
                 .build();
     }

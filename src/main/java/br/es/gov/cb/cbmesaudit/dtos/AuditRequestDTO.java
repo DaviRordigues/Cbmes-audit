@@ -12,9 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuditRequestDTO {
-    private String sourceApp;
-    private String auditedUser;
-    private Date startTime;
-    private Date endTime;
+    private String sourceApss;
+    private String auditedUsers;
+    private Date startDate;
+    private Date endDate;
     private String description;
 }

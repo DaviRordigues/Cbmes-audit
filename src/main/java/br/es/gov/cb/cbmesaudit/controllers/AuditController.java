@@ -29,14 +29,14 @@ public class AuditController {
 			Pageable pageable,
 			@RequestParam(required = false) String auditedUsers,
 			@RequestParam(required = false) String sourceApps,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date startTime,
-			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date endTime) {
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date startDate,
+			@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date endDate) {
 
 		AuditRequestDTO auditRequestDTO = AuditRequestDTO.builder()
-				.auditedUser(auditedUsers)
-				.sourceApp(sourceApps)
-				.startTime(startTime)
-				.endTime(endTime)
+				.auditedUsers(auditedUsers)
+				.sourceApss(sourceApps)
+				.startDate(startDate)
+				.endDate(endDate)
 				.build();
 
 		return ResponseEntity.ok(auditService.findAll(pageable, auditRequestDTO));

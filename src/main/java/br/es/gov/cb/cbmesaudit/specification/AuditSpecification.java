@@ -14,19 +14,19 @@ public class AuditSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (auditRequestDTO.getAuditedUser() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("auditedUser"), auditRequestDTO.getAuditedUser()));
+            if (auditRequestDTO.getAuditedUsers() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("auditedUser"), auditRequestDTO.getAuditedUsers()));
             }
 
-            if (auditRequestDTO.getSourceApp() != null) {
-                predicates.add(criteriaBuilder.equal(root.get("sourceApp"), auditRequestDTO.getSourceApp()));
+            if (auditRequestDTO.getSourceApss() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("sourceApp"), auditRequestDTO.getSourceApss()));
             }
 
-            if (auditRequestDTO.getStartTime() != null && auditRequestDTO.getEndTime() != null) {
+            if (auditRequestDTO.getStartDate() != null && auditRequestDTO.getEndDate() != null) {
                 predicates.add(criteriaBuilder.between(
                         root.get("creationDate"),
-                        auditRequestDTO.getStartTime(),
-                        auditRequestDTO.getEndTime()));
+                        auditRequestDTO.getStartDate(),
+                        auditRequestDTO.getEndDate()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
