@@ -19,7 +19,7 @@ Utilize o comando abaixo para subir a imagem Docker do Oracle:
 http://localhost:8080/swagger-ui/index.html
 
 
-## Criar img no docker
+## Criar conteiner no docker
 ```bash
 docker-compose up
 ```
