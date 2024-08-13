@@ -1,5 +1,6 @@
 package br.es.gov.cb.cbmesaudit.dtos;
 
+import br.es.gov.cb.cbmesaudit.validator.ValidDateRange;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ValidDateRange(message = "Start date must be before end date and neither date can be null.")
 public class AuditFilterDTO {
     @NotNull(message = "Is not null")
     @NotEmpty(message = "Is not empty")
