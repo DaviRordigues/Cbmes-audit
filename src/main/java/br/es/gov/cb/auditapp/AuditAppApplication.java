@@ -1,13 +1,13 @@
-package br.es.gov.cb.cbmesaudit;
+package br.es.gov.cb.auditapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CbmesAuditApplication {
+public class AuditAppApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(CbmesAuditApplication.class, args);
+		SpringApplication.run(AuditAppApplication.class, args);
 	}
 	
 }

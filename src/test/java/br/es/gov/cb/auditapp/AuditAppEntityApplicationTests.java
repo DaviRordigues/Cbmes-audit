@@ -1,10 +1,10 @@
-package br.es.gov.cb.cbmesaudit;
+package br.es.gov.cb.auditapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CbmesAuditEntityApplicationTests {
+class AuditAppEntityApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,4 +1,4 @@
-package br.es.gov.cb.cbmesaudit.config;
+package br.es.gov.cb.auditapp.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -11,7 +11,7 @@ public class SwaggerConfig {
 	
 	@Bean
 	public OpenAPI apiInfo() {
-		return new OpenAPI().info(new Info().title("yametekudassai").version("1.0.0"));
+		return new OpenAPI().info(new Info().title("audit-app").version("1.0.0"));
 	}
 	
 	@Bean

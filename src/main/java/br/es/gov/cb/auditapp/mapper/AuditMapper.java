@@ -1,8 +1,8 @@
-package br.es.gov.cb.cbmesaudit.mapper;
+package br.es.gov.cb.auditapp.mapper;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditRequestDTO;
-import br.es.gov.cb.cbmesaudit.dtos.AuditResponseDTO;
-import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
+import br.es.gov.cb.auditapp.dtos.AuditRequestDTO;
+import br.es.gov.cb.auditapp.dtos.AuditResponseDTO;
+import br.es.gov.cb.auditapp.entities.AuditEntity;
 
 public class AuditMapper {
 	private AuditMapper() {

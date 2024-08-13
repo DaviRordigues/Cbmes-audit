@@ -1,6 +1,6 @@
-package br.es.gov.cb.cbmesaudit.dtos;
+package br.es.gov.cb.auditapp.dtos;
 
-import br.es.gov.cb.cbmesaudit.validator.ValidDateRange;
+import br.es.gov.cb.auditapp.validator.ValidDateRange;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

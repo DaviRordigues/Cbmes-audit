@@ -1,13 +1,13 @@
-package br.es.gov.cb.cbmesaudit.services.imps;
+package br.es.gov.cb.auditapp.services.imps;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditFilterDTO;
-import br.es.gov.cb.cbmesaudit.dtos.AuditRequestDTO;
-import br.es.gov.cb.cbmesaudit.dtos.AuditResponseDTO;
-import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
-import br.es.gov.cb.cbmesaudit.mapper.AuditMapper;
-import br.es.gov.cb.cbmesaudit.repositorys.AuditRepository;
-import br.es.gov.cb.cbmesaudit.services.AuditService;
-import br.es.gov.cb.cbmesaudit.specification.AuditSpecification;
+import br.es.gov.cb.auditapp.dtos.AuditFilterDTO;
+import br.es.gov.cb.auditapp.dtos.AuditRequestDTO;
+import br.es.gov.cb.auditapp.dtos.AuditResponseDTO;
+import br.es.gov.cb.auditapp.entities.AuditEntity;
+import br.es.gov.cb.auditapp.mapper.AuditMapper;
+import br.es.gov.cb.auditapp.repositorys.AuditRepository;
+import br.es.gov.cb.auditapp.services.AuditService;
+import br.es.gov.cb.auditapp.specification.AuditSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -1,7 +1,7 @@
-package br.es.gov.cb.cbmesaudit.specification;
+package br.es.gov.cb.auditapp.specification;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditFilterDTO;
-import br.es.gov.cb.cbmesaudit.entities.AuditEntity;
+import br.es.gov.cb.auditapp.dtos.AuditFilterDTO;
+import br.es.gov.cb.auditapp.entities.AuditEntity;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

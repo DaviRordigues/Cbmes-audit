@@ -1,8 +1,8 @@
-package br.es.gov.cb.cbmesaudit.services;
+package br.es.gov.cb.auditapp.services;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditFilterDTO;
-import br.es.gov.cb.cbmesaudit.dtos.AuditRequestDTO;
-import br.es.gov.cb.cbmesaudit.dtos.AuditResponseDTO;
+import br.es.gov.cb.auditapp.dtos.AuditFilterDTO;
+import br.es.gov.cb.auditapp.dtos.AuditRequestDTO;
+import br.es.gov.cb.auditapp.dtos.AuditResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,6 +1,6 @@
-package br.es.gov.cb.cbmesaudit.validator;
+package br.es.gov.cb.auditapp.validator;
 
-import br.es.gov.cb.cbmesaudit.dtos.AuditFilterDTO;
+import br.es.gov.cb.auditapp.dtos.AuditFilterDTO;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

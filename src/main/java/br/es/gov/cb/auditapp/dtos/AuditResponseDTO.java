@@ -1,4 +1,4 @@
-package br.es.gov.cb.cbmesaudit.dtos;
+package br.es.gov.cb.auditapp.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

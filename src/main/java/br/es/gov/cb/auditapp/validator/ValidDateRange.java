@@ -1,4 +1,4 @@
-package br.es.gov.cb.cbmesaudit.validator;
+package br.es.gov.cb.auditapp.validator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

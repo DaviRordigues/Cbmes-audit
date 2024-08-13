@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cbmes-audit
+    name: audit-app
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/XE
     username: admin_user
